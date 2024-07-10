@@ -1,5 +1,4 @@
 # generate a noisy RGB image
-# should this be uniform or random generation of noise??
 
 from PIL import Image
 import numpy as np
@@ -29,6 +28,8 @@ for i in range(len(colors)):
     
 # generate random noise
 noise = np.random.randint(0, 10, (total_height, total_width, 3), dtype=np.uint8)
+
+# instead of generating random black particles, pick random pixels, check what color it is, then swap it for either of the remaining colors
 
 # add noise to image array
 noisy_image_array = image_array + noise
