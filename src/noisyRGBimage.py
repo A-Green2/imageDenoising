@@ -30,7 +30,6 @@ for i in range(len(colors)):
 # noise = np.random.randint(0, 10, (total_height, total_width, 3), dtype=np.uint8)
 
 # add noise to image array
-# noisy_image_array = image_array + noise
 noisy_image_array = image_array
 
 
@@ -39,6 +38,10 @@ noisy_image_array = np.clip(noisy_image_array, 0, 255)
 
 # convert array to image
 noisy_image = Image.fromarray(noisy_image_array.astype(np.uint8))
+
+
+# pick random pixels, check what color it is, then swap it for either of the remaining colors
+# refs: https://pillow.readthedocs.io/en/stable/reference/PixelAccess.html, https://stackoverflow.com/questions/36468530/changing-pixel-color-value-in-pil
 
 # access pixels
 pixels = noisy_image.load()
@@ -87,9 +90,4 @@ noisy_image.save('noisy_rgb_image.png')
 
 # display the image
 noisy_image.show()
-
-# instead of generating random black particles, pick random pixels, check what color it is, then swap it for either of the remaining colors
-# use PixelAccess class to read and write access to PIL.Image data at a pixel level
-# Note: accessing individual pixels is fairly slow - look for other methods
-# refs: https://pillow.readthedocs.io/en/stable/reference/PixelAccess.html, https://stackoverflow.com/questions/36468530/changing-pixel-color-value-in-pil
 
