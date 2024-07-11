@@ -6,7 +6,7 @@ import random
 import math
 
 # block dimensions of each RGB color block
-block_width, block_height = 100, 100
+block_width, block_height = 300, 300
 spacing = 0  # no spacing between blocks
 total_width = 3 * block_width + 2 * spacing  # total image width
 total_height = block_height  # total image height
@@ -16,17 +16,14 @@ image_array = np.ones((total_height, total_width, 3), dtype=np.uint8) * 255
 
 # list to define colors (RGB)
 colors = [
-    [225, 0, 0],    # Red
-    [0, 225, 0],    # Green
-    [0, 0, 225]     # Blue
+    [225, 0, 0],    # red
+    [0, 225, 0],    # green
+    [0, 0, 225]     # blue
 ]
 
 # fill in color blocks
 for i in range(len(colors)):
     color = colors[i]
-    # x = colors[i]
-    # color = colors[i] + np.ceil(np.random.rand() * 50 - 25)
-    
     start_x = i * (block_width + spacing)
     end_x = start_x + block_width
     image_array[:, start_x:end_x] = color
@@ -55,17 +52,19 @@ pixels = noisy_image.load()
 # get height and width of image
 height = noisy_image.height
 width = noisy_image.width
+print('height: ', height, " width: ", width)
+print('img.size[0]: ', noisy_image.size[0], ' img.size[1]: ', noisy_image.size[1])
 
 # calculate the total number of pixels in the image = height * width
 total_num_pixels = height * width
 
-for i in range(100):
-    for j in range(100):
+for i in range(width):
+    for j in range(height):
         x = pixels[i, j]
         y = (math.ceil(random.random() * 50 - 25), math.ceil(random.random() * 50 - 25), math.ceil(random.random() * 50 - 25))
         z = tuple(map(lambda i, j: i + j, x,y))
         # y = tuple(map(tuple, y.astype(int)))
-        print("I; ", i , "j: ", j, "x: ", x, "y: ", y, 'z: ', z)
+        # print("I; ", i , "j: ", j, "x: ", x, "y: ", y, 'z: ', z)
         pixels[i, j] = z
     
 # total_num_pixels = height * width
@@ -73,7 +72,7 @@ for i in range(100):
 
 # random number of pixels to swap
 # num_swaps = np.random.randint(0, total_num_pixels)
-num_swaps = 100
+num_swaps = 500
 # print(num_swaps)
 
 # loop through the number of pixels to swap
