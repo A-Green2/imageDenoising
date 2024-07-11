@@ -107,6 +107,7 @@ for i in range(num_swaps):
             
     # pick a random color from the remaining colors list
     rand_color = remaining_colors[np.random.randint(0, len(remaining_colors))]
+    # print("rand_color: ", rand_color)
     pixels[x, y] = tuple(rand_color)          
 
 # save image

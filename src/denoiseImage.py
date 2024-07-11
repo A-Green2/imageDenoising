@@ -9,19 +9,20 @@ def calculate_phi(actual_pixel_value, expected_pixel_value, sigma):
     x = math.exp(numerator / math.pow(sigma))
     return x
 
-#  RGB color list
+#  tuple of RGB colors
 RGB_colors = [
     [225, 0, 0],
     [0, 225, 0],
     [0, 0, 225]
 ]
 
-
 # open image
 with Image.open('noisy_rgb_image.png') as im:
     
-    # access individual pixel values
+    # access individual pixel values - list datatype
     pixel = im.load()
+    
+print(tuple(pixel[0, 0]))
 
 # get width and height of image
 width = im.width
@@ -33,5 +34,13 @@ mean_deviation = 5
 for w in range(width):
     for h in range(height):
         
-        # calculate phi
-        phi = calculate_phi(pixel[w, h], RGB_colors, mean_deviation)
+        # iterate over colors
+        for i in range(len(RGB_colors)):
+            
+            # convert pixel list to pixel tuple
+            pixel[w, h] = tuple(pixel[w, h])
+            
+            print("pixel: ", pixel[w, h])
+            
+            # calculate phi
+            phi = calculate_phi(pixel[w, h], RGB_colors[i], mean_deviation)
