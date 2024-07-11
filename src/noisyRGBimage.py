@@ -2,6 +2,8 @@
 
 from PIL import Image
 import numpy as np
+import random
+import math
 
 # block dimensions of each RGB color block
 block_width, block_height = 100, 100
@@ -14,14 +16,17 @@ image_array = np.ones((total_height, total_width, 3), dtype=np.uint8) * 255
 
 # list to define colors (RGB)
 colors = [
-    [255, 0, 0],    # Red
-    [0, 255, 0],    # Green
-    [0, 0, 255]     # Blue
+    [225, 0, 0],    # Red
+    [0, 225, 0],    # Green
+    [0, 0, 225]     # Blue
 ]
 
 # fill in color blocks
 for i in range(len(colors)):
     color = colors[i]
+    # x = colors[i]
+    # color = colors[i] + np.ceil(np.random.rand() * 50 - 25)
+    
     start_x = i * (block_width + spacing)
     end_x = start_x + block_width
     image_array[:, start_x:end_x] = color
@@ -45,6 +50,7 @@ noisy_image = Image.fromarray(noisy_image_array.astype(np.uint8))
 
 # access pixels
 pixels = noisy_image.load()
+# pixels = np.random.randint(0, 15)
 
 # get height and width of image
 height = noisy_image.height
@@ -52,12 +58,23 @@ width = noisy_image.width
 
 # calculate the total number of pixels in the image = height * width
 total_num_pixels = height * width
-print(total_num_pixels)
+
+for i in range(100):
+    for j in range(100):
+        x = pixels[i, j]
+        y = (math.ceil(random.random() * 50 - 25), math.ceil(random.random() * 50 - 25), math.ceil(random.random() * 50 - 25))
+        z = tuple(map(lambda i, j: i + j, x,y))
+        # y = tuple(map(tuple, y.astype(int)))
+        print("I; ", i , "j: ", j, "x: ", x, "y: ", y, 'z: ', z)
+        pixels[i, j] = z
+    
+# total_num_pixels = height * width
+# print(total_num_pixels)
 
 # random number of pixels to swap
-num_swaps = np.random.randint(0, total_num_pixels)
-# num_swaps = 100
-print(num_swaps)
+# num_swaps = np.random.randint(0, total_num_pixels)
+num_swaps = 100
+# print(num_swaps)
 
 # loop through the number of pixels to swap
 for i in range(num_swaps):
