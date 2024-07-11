@@ -49,7 +49,7 @@ noisy_image = Image.fromarray(noisy_image_array.astype(np.uint8))
 pixels = noisy_image.load()
 # pixels = np.random.randint(0, 15)
 
-# get height and width of image
+# generate random noise
 height = noisy_image.height
 width = noisy_image.width
 print('height: ', height, " width: ", width)
@@ -58,14 +58,22 @@ print('img.size[0]: ', noisy_image.size[0], ' img.size[1]: ', noisy_image.size[1
 # calculate the total number of pixels in the image = height * width
 total_num_pixels = height * width
 
+# iterate through image
 for i in range(width):
     for j in range(height):
-        x = pixels[i, j]
-        y = (math.ceil(random.random() * 50 - 25), math.ceil(random.random() * 50 - 25), math.ceil(random.random() * 50 - 25))
-        z = tuple(map(lambda i, j: i + j, x,y))
-        # y = tuple(map(tuple, y.astype(int)))
+        
+        # get current pixel value
+        current_pixel_value = pixels[i, j]
+        
+        # get a random number between (-25, 25)
+        rand_num = (math.ceil(random.random() * 50 - 25), math.ceil(random.random() * 50 - 25), math.ceil(random.random() * 50 - 25))
+        
+        # add random number to the current pixel value
+        new_pixel_value = tuple(map(lambda i, j: i + j, current_pixel_value, rand_num))
         # print("I; ", i , "j: ", j, "x: ", x, "y: ", y, 'z: ', z)
-        pixels[i, j] = z
+        
+        # update current pixel to new color
+        pixels[i, j] = new_pixel_value
     
 # total_num_pixels = height * width
 # print(total_num_pixels)
