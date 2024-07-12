@@ -72,11 +72,13 @@ for i in range(width):
         new_pixel_value = tuple(map(lambda i, j: i + j, current_pixel_value, rand_num))
         # print("I; ", i , "j: ", j, "x: ", x, "y: ", y, 'z: ', z)
         
-        # update current pixel to new color
+        # update current pixel tuple to new color
         pixels[i, j] = new_pixel_value
+        print("new pixel value: ", new_pixel_value)
     
 # total_num_pixels = height * width
 # print(total_num_pixels)
+
 
 # random number of pixels to swap
 # num_swaps = np.random.randint(0, total_num_pixels)
