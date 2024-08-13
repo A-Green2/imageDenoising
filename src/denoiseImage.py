@@ -21,21 +21,23 @@ def new_image(original_image_width, original_image_height):
 # function to evaluate the likelihood of a pixel's color
 # evaluate phi for all 3 colors store in data structure above - take the best/highest value 
 def calculate_phi(actual_pixel_value, expected_pixel_value, sigma):
-    # TODO: access individual elements of pixels values
-    # TODO: ensure numerator computes the dot product
-    # TODO: call function using example values to check function
-    # numerator = -1 * math.pow((actual_pixel_value - expected_pixel_value), 2)
+
+    # initialize variable holding numerator of function
     pixel_diff = ()
+    
+    # calculate difference between the pixel's actual value and the RGB value
     pixel_diff = (actual_pixel_value[0] - expected_pixel_value[0], 
                   actual_pixel_value[1] - expected_pixel_value[1], 
                   actual_pixel_value[2] - expected_pixel_value[2]
                   )
     
+    # finish calculating the numerator by negating pixel_diff and squaring each component
     numerator = -1 * (math.pow(pixel_diff[0], 2) + 
                       math.pow(pixel_diff[1], 2) + 
                       math.pow(pixel_diff[2], 2)
                       )
     
+    # apply the numerator to the power of e
     x = math.exp(numerator / math.pow(sigma, 2))
     return x
 
@@ -60,7 +62,6 @@ height = im.height
 mean_deviation = 5
 
 # initialize list to store phi values
-# phi_values_list = []
 # initialize array storing phi values for each pixel's RGB values
 phi_values_list = np.zeros((width, height, 3))
 
@@ -86,9 +87,11 @@ for w in range(width):
             # print("phi: ", phi)
             # print(f"phi for pixel ({w}, {h}) and color {RGB_colors[i]}: {phi}")
             # TODO: save as list then convert to tuple
-            phi_values_list[w][h][i] = phi
+            # phi_values_list[w][h][i] = phi
+            phi_values_list[w][h] = phi
 
-print("phi list: ", phi_values_list[0][0][0])
+# print("phi list: ", phi)
 
-# # iterate over the phi of each pixel
+# iterate over the phi of each pixel
 # for p in phi_values_list:
+    
