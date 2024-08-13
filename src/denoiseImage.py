@@ -79,6 +79,7 @@ for w in range(width):
             
             # convert pixel list to pixel tuple
             pixel[w, h] = tuple(pixel[w, h])
+            print("pixel[w, h]: ", pixel[w, h])
             
             # print("pixel: ", pixel[w, h])
             
@@ -89,9 +90,8 @@ for w in range(width):
             # TODO: save as list then convert to tuple
             # phi_values_list[w][h][i] = phi
             phi_values_list[w][h] = phi
+            print("phi_values_list: ", phi_values_list[w][h])
 
-# print("phi list: ", phi)
-
-# iterate over the phi of each pixel
+# iterate over the phi values of each pixel 
 # for p in phi_values_list:
     
