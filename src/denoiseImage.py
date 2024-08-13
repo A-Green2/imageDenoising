@@ -76,6 +76,7 @@ for w in range(width):
         
         # iterate over colors
         for i in range(len(RGB_colors)):
+            print("rgb_color: ", RGB_colors[i])
             
             # convert pixel list to pixel tuple
             pixel[w, h] = tuple(pixel[w, h])

@@ -61,19 +61,23 @@ total_num_pixels = height * width
 # iterate through image
 for i in range(width):
     for j in range(height):
-        
+        print("before update: ", pixels[i, j])
         # get current pixel value
         current_pixel_value = pixels[i, j]
+        print("current_pixel_value: ", current_pixel_value)
         
         # get a random number between (-25, 25)
         rand_num = (math.ceil(random.random() * 50 - 25), math.ceil(random.random() * 50 - 25), math.ceil(random.random() * 50 - 25))
-        
+        print("rand_num: ", rand_num)
         # add random number to the current pixel value
         new_pixel_value = tuple(map(lambda i, j: i + j, current_pixel_value, rand_num))
+        print("new_pixel_value: ", new_pixel_value)
         # print("I; ", i , "j: ", j, "x: ", x, "y: ", y, 'z: ', z)
         
         # update current pixel tuple to new color
+        # TODO: why is pixels not always updating to the new_pixels_value??
         pixels[i, j] = new_pixel_value
+        print("pixel[", i, ",", j, "]: ", pixels[i, j])
         print("new pixel value: ", new_pixel_value)
     
 # total_num_pixels = height * width
