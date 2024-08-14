@@ -58,28 +58,34 @@ print('img.size[0]: ', noisy_image.size[0], ' img.size[1]: ', noisy_image.size[1
 # calculate the total number of pixels in the image = height * width
 total_num_pixels = height * width
 
+pixel_list = []
+
 # iterate through image
 for i in range(width):
     for j in range(height):
-        print("before update: ", pixels[i, j])
+        # print("before update: ", pixels[i, j])
         # get current pixel value
-        current_pixel_value = pixels[i, j]
-        print("current_pixel_value: ", current_pixel_value)
+        current_pixel_value = list(pixels[i, j])
+        
+        # convert pixel tuple to pixel list
+        # pixel_list = list(current_pixel_value)
+        # print("current_pixel_value: ", current_pixel_value)
         
         # get a random number between (-25, 25)
         rand_num = (math.ceil(random.random() * 50 - 25), math.ceil(random.random() * 50 - 25), math.ceil(random.random() * 50 - 25))
-        print("rand_num: ", rand_num)
+        # print("rand_num: ", rand_num)
         # add random number to the current pixel value
-        new_pixel_value = tuple(map(lambda i, j: i + j, current_pixel_value, rand_num))
-        print("new_pixel_value: ", new_pixel_value)
+        # new_pixel_value = tuple(map(lambda i, j: i + j, current_pixel_value, rand_num))
+        new_pixel_value = list(map(lambda i, j: i + j, current_pixel_value, rand_num))
         # print("I; ", i , "j: ", j, "x: ", x, "y: ", y, 'z: ', z)
         
         # update current pixel tuple to new color
         # TODO: why is pixels not always updating to the new_pixels_value??
-        pixels[i, j] = new_pixel_value
-        print("pixel[", i, ",", j, "]: ", pixels[i, j])
-        print("new pixel value: ", new_pixel_value)
-    
+        pixels[i, j] = tuple(new_pixel_value)
+        # pixels[i, j] = (new_pixel_value[0], new_pixel_value[1], new_pixel_value[2])
+        # print("pixel[", i, ",", j, "]: ", pixels[i, j])
+        # print("new pixel value: ", new_pixel_value)
+
 # total_num_pixels = height * width
 # print(total_num_pixels)
 
