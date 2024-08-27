@@ -4,7 +4,8 @@ from PIL import Image
 import numpy as np
 
 # block dimensions of each RGB color block
-block_width, block_height = 100, 100
+block_width = 100
+block_height = 100
 spacing = 0  # no spacing between blocks
 total_width = 3 * block_width + 2 * spacing  # total image width
 total_height = block_height  # total image height

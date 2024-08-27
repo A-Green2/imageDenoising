@@ -53,12 +53,10 @@ with Image.open('noisy_rgb_image.png') as im:
     
     # access individual pixel values - list datatype
     pixel = im.load()
-    print("pixel: ", pixel)
 
 # get width and height of image
 width = im.width
 height = im.height
-print("width", height)
 
 # initialize the variance, sigma
 mean_deviation = 5
