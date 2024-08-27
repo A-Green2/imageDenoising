@@ -53,10 +53,12 @@ with Image.open('noisy_rgb_image.png') as im:
     
     # access individual pixel values - list datatype
     pixel = im.load()
+    print("pixel: ", pixel)
 
 # get width and height of image
 width = im.width
 height = im.height
+print("width", height)
 
 # initialize the variance, sigma
 mean_deviation = 5
@@ -65,34 +67,80 @@ mean_deviation = 5
 # initialize array storing phi values for each pixel's RGB values
 phi_values_list = np.zeros((width, height, 3))
 
+# initialize max RGB phi value
+max_value = 0
+# phi_values_list = []
+
 # iterate through each pixel
 # print(width)
+# for w in range(width):
+#     # print("w: ", w)
+#     # phi_values_list[w] = []
+    
+#     for h in range(height):
+#         # phi_values_list[w][h]= []
+        
+#         # iterate over colors
+#         for i in range(len(RGB_colors)):
+#             print("rgb_color: ", RGB_colors[i])
+            
+#             # convert pixel list to pixel tuple
+#             pixel[w, h] = tuple(pixel[w, h])
+#             print(f"pixel[{w, h}]: ", pixel[w, h])
+            
+#             # print("pixel: ", pixel[w, h])
+            
+#             # calculate phi 
+#             phi = calculate_phi(pixel[w, h], RGB_colors[i], mean_deviation)
+#             # print("phi: ", phi)
+#             # print(f"phi for pixel ({w}, {h}) and color {RGB_colors[i]}: {phi}")
+#             # TODO: save as list then convert to tuple
+#             # phi_values_list[w][h][i] = phi
+#             phi_values_list[w][h].append(phi)
+#             print("phi_values_list: ", phi_values_list[w][h])
+
 for w in range(width):
     # print("w: ", w)
     # phi_values_list[w] = []
     
     for h in range(height):
-        # phi_values_list[w][h]= []
+            
+        # convert pixel list to pixel tuple
+        pixel[w, h] = tuple(pixel[w, h])
+        print(f"pixel[{w, h}]: ", pixel[w, h])
         
-        # iterate over colors
-        for i in range(len(RGB_colors)):
-            print("rgb_color: ", RGB_colors[i])
-            
-            # convert pixel list to pixel tuple
-            pixel[w, h] = tuple(pixel[w, h])
-            print("pixel[w, h]: ", pixel[w, h])
-            
-            # print("pixel: ", pixel[w, h])
-            
-            # calculate phi 
-            phi = calculate_phi(pixel[w, h], RGB_colors[i], mean_deviation)
-            # print("phi: ", phi)
-            # print(f"phi for pixel ({w}, {h}) and color {RGB_colors[i]}: {phi}")
-            # TODO: save as list then convert to tuple
-            # phi_values_list[w][h][i] = phi
-            phi_values_list[w][h] = phi
-            print("phi_values_list: ", phi_values_list[w][h])
+        # calculate phi for RGB pixel values
+        phi_red = calculate_phi(pixel[w, h], RGB_colors[0], mean_deviation)
+        phi_green = calculate_phi(pixel[w, h], RGB_colors[1], mean_deviation)
+        phi_blue = calculate_phi(pixel[w, h], RGB_colors[2], mean_deviation)
 
-# iterate over the phi values of each pixel 
-# for p in phi_values_list:
-    
+        phi_values_list[w][h] = [phi_red, phi_green, phi_blue]
+        print("phi_values_list: ", phi_values_list[w][h])
+        
+        # in each pixel, select the max RGB phi value
+        max_value = max(phi_values_list[w][h])
+        
+        # if (phi_values_list[0] > phi_values_list[1]).any():
+        #     max_value = phi_values_list[0]
+        # elif phi_values_list[0] < phi_values_list[1]:
+        #     max_value = phi_values_list[1]
+        # if (max_value > phi_values_list[2]).any():
+        #     max_value = max_value
+        # elif max_value < phi_values_list[2]:
+        #     max_value = phi_values_list[2]
+        
+        print(f"max_value: ", max_value)
+
+# iterate through each pixel
+# for w in range(width):
+#     for h in range(height):
+#         if phi_values_list[0] > phi_values_list[1]:
+#             max_value = phi_values_list[0]
+#         elif phi_values_list[0] < phi_values_list[1]:
+#             max_value = phi_values_list[1]
+#         if max_value > phi_values_list[2]:
+#             max_value = max_value
+#         elif max_value < phi_values_list[2]:
+#             max_value = phi_values_list[2]
+            
+# print(f"max_value: ", max_value)
